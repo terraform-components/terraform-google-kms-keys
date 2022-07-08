@@ -16,14 +16,14 @@ variable "key_ring_name" {
   default = "main"
 }
 
-variable "keys" {
-  type        = list(string)
-  description = "Name of your keys"
-}
-
 variable "location" {
   type        = string
   description = "Location of the key. Be aware that the resources using the key and the key location need to match. Resources in `global` also need a `global` key and same for `europe` or `europe-west3` etc."
+}
+
+variable "keys" {
+  type        = list(string)
+  description = "Name of your keys"
 }
 
 variable "service_identities" {
