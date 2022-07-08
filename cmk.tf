@@ -8,12 +8,12 @@ resource "google_kms_crypto_key" "this" {
   for_each        = toset(var.keys)
   name            = "${each.key}-${var.location}"
   key_ring        = var.kms_key_ring_id != null ? var.kms_key_ring_id : join("", google_kms_key_ring.this.*.id)
-  purpose         = "ENCRYPT_DECRYPT"
-  rotation_period = "7776000s"
+  purpose         = var.purpose
+  rotation_period = var.rotation_period
 
   version_template {
-    protection_level = "SOFTWARE"
-    algorithm        = "GOOGLE_SYMMETRIC_ENCRYPTION"
+    protection_level = var.protection_level
+    algorithm        = var.algorithm
   }
 
   labels = var.labels

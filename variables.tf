@@ -12,8 +12,9 @@ variable "kms_key_ring_id" {
 }
 
 variable "key_ring_name" {
-  type    = string
-  default = "main"
+  type        = string
+  default     = "main"
+  description = "the name for the kms key ring if it is created by this module"
 }
 
 variable "location" {
@@ -28,10 +29,42 @@ variable "keys" {
 
 variable "service_identities" {
   type        = map(list(string))
-  description = "Service identities for the key."
+  description = "Service identities for the keys. This is separate as it may not apply to every key."
 }
 
 variable "labels" {
   type        = map(string)
-  description = "Labels for the key."
+  description = "Labels for the keys"
+}
+
+variable "protection_level" {
+  type        = string
+  default     = "SOFTWARE"
+  description = <<-EOT
+    Default protection level.
+
+    **SOFTWARE** 
+    
+    **HSM** 
+    
+    **EXTERNAL**
+    EOT
+}
+
+variable "algorithm" {
+  type        = string
+  default     = "GOOGLE_SYMMETRIC_ENCRYPTION"
+  description = "See https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm"
+}
+
+variable "purpose" {
+  type        = string
+  default     = "ENCRYPT_DECRYPT"
+  description = "See https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys#CryptoKeyPurpose"
+}
+
+variable "rotation_period" {
+  type        = string
+  default     = "31536000s"
+  description = "Default is 1 year (31536000s)"
 }

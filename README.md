@@ -37,7 +37,7 @@ Type: `list(string)`
 
 ### <a name="input_labels"></a> [labels](#input\_labels)
 
-Description: Labels for the key.
+Description: Labels for the keys
 
 Type: `map(string)`
 
@@ -49,7 +49,7 @@ Type: `string`
 
 ### <a name="input_service_identities"></a> [service\_identities](#input\_service\_identities)
 
-Description: Service identities for the key.
+Description: Service identities for the keys. This is separate as it may not apply to every key.
 
 Type: `map(list(string))`
 
@@ -57,9 +57,17 @@ Type: `map(list(string))`
 
 The following input variables are optional (have default values):
 
+### <a name="input_algorithm"></a> [algorithm](#input\_algorithm)
+
+Description: See https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm
+
+Type: `string`
+
+Default: `"GOOGLE_SYMMETRIC_ENCRYPTION"`
+
 ### <a name="input_key_ring_name"></a> [key\_ring\_name](#input\_key\_ring\_name)
 
-Description: n/a
+Description: the name for the kms key ring if it is created by this module
 
 Type: `string`
 
@@ -77,6 +85,36 @@ See also: https://cloud.google.com/kms/docs/resource-hierarchy#key_rings"
 Type: `string`
 
 Default: `null`
+
+### <a name="input_protection_level"></a> [protection\_level](#input\_protection\_level)
+
+Description: Default protection level.
+
+**SOFTWARE**
+
+**HSM**
+
+**EXTERNAL**
+
+Type: `string`
+
+Default: `"SOFTWARE"`
+
+### <a name="input_purpose"></a> [purpose](#input\_purpose)
+
+Description: See https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys#CryptoKeyPurpose
+
+Type: `string`
+
+Default: `"ENCRYPT_DECRYPT"`
+
+### <a name="input_rotation_period"></a> [rotation\_period](#input\_rotation\_period)
+
+Description: Default is 1 year (31536000s)
+
+Type: `string`
+
+Default: `"31536000s"`
 
 ## Outputs
 
