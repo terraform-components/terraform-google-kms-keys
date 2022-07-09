@@ -1,11 +1,9 @@
 variable "name_format" {
   type = object({
     name1 = string
-    name2 = string
   })
   default = {
     name1 = "%s"
-    name2 = "%s-%s"
   }
 }
 
