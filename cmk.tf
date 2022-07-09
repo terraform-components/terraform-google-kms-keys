@@ -1,12 +1,12 @@
 resource "google_kms_key_ring" "this" {
   count    = var.kms_key_ring_id != null ? 0 : 1
-  name     = "${var.key_ring_name}-${var.location}"
+  name     = format(var.name_format.name1, var.key_ring_name)
   location = var.location
 }
 
 resource "google_kms_crypto_key" "this" {
   for_each        = toset(var.keys)
-  name            = "${each.key}-${var.location}"
+  name            = format(var.name_format.name2.var.name, each.key)
   key_ring        = var.kms_key_ring_id != null ? var.kms_key_ring_id : join("", google_kms_key_ring.this.*.id)
   purpose         = var.purpose
   rotation_period = var.rotation_period

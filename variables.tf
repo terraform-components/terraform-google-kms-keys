@@ -1,3 +1,18 @@
+variable "name_format" {
+  type = object({
+    name1 = string
+    name2 = string
+  })
+  default = {
+    name1 = "%s"
+    name2 = "%s-%s"
+  }
+}
+
+variable "name" {
+  type = string
+}
+
 variable "kms_key_ring_id" {
   type        = string
   description = <<-EOT
@@ -9,12 +24,6 @@ variable "kms_key_ring_id" {
     See also: https://cloud.google.com/kms/docs/resource-hierarchy#key_rings"
     EOT
   default     = null
-}
-
-variable "key_ring_name" {
-  type        = string
-  default     = "main"
-  description = "the name for the kms key ring if it is created by this module"
 }
 
 variable "location" {
