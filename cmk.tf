@@ -1,6 +1,6 @@
 resource "google_kms_key_ring" "this" {
   count    = var.kms_key_ring_id != null ? 0 : 1
-  name     = format(var.name_format.name1, var.key_ring_name)
+  name     = format(var.name_format.name1, var.name)
   location = var.location
 }
 
